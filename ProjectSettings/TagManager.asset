@@ -7,6 +7,8 @@ TagManager:
   - GladiatorPanel
   - GladiatorsPanel
   - SlavesStoreController
+  - CanvasController
+  - ToolTipCanvas
   layers:
   - Default
   - TransparentFX

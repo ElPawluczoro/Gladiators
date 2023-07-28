@@ -24,11 +24,8 @@ namespace GameScripts.UI
         {
             gladiator = g;
             var localGladiator = g.GetComponent<Gladiator>();
-            
-            gladiatorName.text = localGladiator.gladiatorName;
-            gladiatorHP.text = localGladiator.healthPoints.ToString();
-            gladiatorAD.text = localGladiator.attackDamage.ToString();
-            gladiatorArmor.text = localGladiator.armor.ToString();
+            UIGenerator.SetGladiatorStats
+                (g.GetComponent<Gladiator>(), gladiatorName, gladiatorHP, gladiatorAD, gladiatorArmor);
             gladiatorCost.text = localGladiator.buyCost.ToString();
             gladiatorSalary.text = localGladiator.salary.ToString();
         }

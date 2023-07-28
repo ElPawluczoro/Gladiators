@@ -28,6 +28,11 @@ namespace GameScripts.Core
                 PlayerPrefs.SetInt(coins, 0);
             }
         }
+
+        public static void AddCoins(int amount)
+        {
+            PlayerPrefs.SetInt(coins, PlayerPrefs.GetInt(coins) + amount);
+        }
         
         
         

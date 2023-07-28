@@ -11,7 +11,7 @@ namespace GameScripts.Core
         [SerializeField] private TMP_Text tourText;
     
         private const string playerPrefTour = "tour";
-
+        
         public delegate void OnTourEnd();
         public static event OnTourEnd onTourEnd;
 

@@ -22,17 +22,21 @@ namespace GameScripts.Gladiators
         public int gladiatorLevel { get => _gladiatorLevel; }
 
         //costs
-        public int _buyCost, _salary;
+        private int _buyCost, _salary;
         public int buyCost { get => _buyCost; }
         public int salary { get => _salary; }
         
+        //status
+        private bool _tired;
+        public bool tired { get => _tired; }
         
         
-        public void SetGladiatorProperties(string name, int hp, int ad)
+        public void SetGladiatorProperties(string n, int hp, int ad, int lv)
         {
-            _gladiatorName = name;
+            _gladiatorName = n;
             _healthPoints = hp;
             _attackDamage = ad;
+            _gladiatorLevel = lv;
             
             var priceMultiplier = Random.Range(1.00f, 2.00f);
             var priceAdd = Random.Range(10, 100);
@@ -41,6 +45,22 @@ namespace GameScripts.Gladiators
             var salaryMultiplier = Random.Range(0.5f, 1.5f);
             _salary = (int)(_buyCost * 0.1f * salaryMultiplier);
         }
+
+        public void SetGladiatorProperties(Gladiator gladiator)
+        {
+            _gladiatorName = gladiator.gladiatorName;
+            _healthPoints = gladiator.healthPoints;
+            _attackDamage = gladiator.attackDamage;
+            _armor = gladiator.armor;
+            _gladiatorLevel = gladiator.gladiatorLevel;
+        }
+
+        public void SetGladiatorTired(bool t)
+        {
+            _tired = t;
+        }
+
+
 
     }
 }

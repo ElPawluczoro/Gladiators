@@ -9,6 +9,8 @@ namespace GameScripts.UI
         [SerializeField] private List<GameObject> canvases;
         private GameObject currentCanvas;
 
+        public GameObject duelPanel;
+
         public void SwitchPanel(GameObject canvas)
         {
             if (currentCanvas == canvas) return;
@@ -25,5 +27,6 @@ namespace GameScripts.UI
             canvas.GetComponent<Canvas>().enabled = true;
             canvas.GetComponent<IGamePanel>().OnPanelOpen();
         }
+
     }
 }

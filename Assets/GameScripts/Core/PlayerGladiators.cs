@@ -16,11 +16,13 @@ namespace GameScripts.Core
         private void OnEnable()
         {
             ToursController.onTourEnd += PaySalary;
+            ToursController.onTourEnd += SetGladiatorsNoLongerTired;
         }
 
         private void OnDisable()
         {
             ToursController.onTourEnd -= PaySalary;
+            ToursController.onTourEnd -= SetGladiatorsNoLongerTired;
         }
 
         public void AddGladiator(GameObject gladiator)
@@ -48,6 +50,14 @@ namespace GameScripts.Core
         public void PaySalary()
         {
             CoinsController.SpendCoins(PlayerPrefs.GetInt(salary, 0));
+        }
+
+        public void SetGladiatorsNoLongerTired()
+        {
+            foreach (var g in _playerGladiators)
+            {
+                g.GetComponent<Gladiator>().SetGladiatorTired(false);
+            }
         }
         
         

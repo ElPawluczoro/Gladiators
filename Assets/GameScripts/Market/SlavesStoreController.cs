@@ -20,43 +20,6 @@ namespace GameScripts.Market
         [SerializeField] private GameObject gladiatorPrefab;
 
 
-        [SuppressMessage("ReSharper", "StringLiteralTypo")]
-        private string[] firstNames =
-        {
-            "Agrippa", "Gaius", "Marcus",
-            "Paullus", "Sertor", "Titus",
-            "Appius", "Gnaeus", "Mettius",
-            "Postumus", "Servius", "Tullus",
-            "Aulus", "Hostus", "Nonus",
-            "Proculus", "Sextus", "Vibius",
-            "Caeso", "Lucius", "Numerius",
-            "Publius", "Spurius", "Volesus",
-            "Decimus", "Mamercus", "Octavius",
-            "Quintus", "Statius", "Vopiscus",
-            "Faustus", "Manius", "Opiter",
-            "Septimus", "Tiberius"
-        };
-
-        [SuppressMessage("ReSharper", "StringLiteralTypo")]
-        private string[] lastNames =
-        {
-            "Agelatus", "Balbin", "Brokchus",
-            "Brutus", "Cato","Caecus",
-            "Cepio", "Cincinnatus", "Crassus",
-            "Cunctator", "Flaccus", "Flakkus",
-            "Flavius", "Glaba", "Geta",
-            "Grakhus", "Kaligula", "Kalwus",
-            "Karakalla", "Karbo", "Katullus",
-            "Longiunus", "Lukkulus", "Magnus",
-            "Maksymus", "Mektator", "Nazyka",
-            "Nerwa", "Piso", "Postumus",
-            "Pulcher", "Rufus", "Ruso",
-            "Scewola", "Saturninus", "Skaurus",
-            "Strabo", "Sulla", "Verres",
-            "Verrucosus", "Varo"
-        };
-        
-        
         private void OnEnable()
         {
             Core.ToursController.onTourEnd += SetNewSlaves;
@@ -91,21 +54,10 @@ namespace GameScripts.Market
             {
                 var newGladiator = Instantiate(gladiatorPrefab, gladiatorsGO.transform);
                 newGladiator.GetComponent<Gladiator>()
-                    .SetGladiatorProperties(GenerateGladiatorName(), Random.Range(80, 140), Random.Range(6, 12));
+                    .SetGladiatorProperties(GladiatorsGenerator.GenerateGladiatorName(), Random.Range(80, 140), Random.Range(6, 12), 1);
                 availableSlaves.Add(newGladiator);
             }
         }
-
-        public string GenerateGladiatorName()
-        {
-            string gladiatorName = "";
-            gladiatorName += firstNames[Random.Range(0, firstNames.Length)];
-            gladiatorName += " ";
-            gladiatorName += lastNames[Random.Range(0, lastNames.Length)];
-
-            return gladiatorName;
-        }
-        
 
         private void ResetAvailableSlaves()
         {
