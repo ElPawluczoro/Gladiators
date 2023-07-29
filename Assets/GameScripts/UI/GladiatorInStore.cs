@@ -15,6 +15,7 @@ namespace GameScripts.UI
         [SerializeField] private TMP_Text gladiatorHP;
         [SerializeField] private TMP_Text gladiatorAD;
         [SerializeField] private TMP_Text gladiatorArmor;
+        [SerializeField] private TMP_Text gladiatorHitChance;
         [SerializeField] private TMP_Text gladiatorCost;
         [SerializeField] private TMP_Text gladiatorSalary;
 
@@ -25,7 +26,8 @@ namespace GameScripts.UI
             gladiator = g;
             var localGladiator = g.GetComponent<Gladiator>();
             UIGenerator.SetGladiatorStats
-                (g.GetComponent<Gladiator>(), gladiatorName, gladiatorHP, gladiatorAD, gladiatorArmor);
+            (g.GetComponent<Gladiator>(), gladiatorName, gladiatorHP,
+                gladiatorAD, gladiatorArmor, gladiatorHitChance);
             gladiatorCost.text = localGladiator.buyCost.ToString();
             gladiatorSalary.text = localGladiator.salary.ToString();
         }

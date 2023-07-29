@@ -13,6 +13,7 @@ namespace GameScripts.Arena
         [SerializeField] private TMP_Text healthTMP;
         [SerializeField] private TMP_Text attackDamageTMP;
         [SerializeField] private TMP_Text armorTMP;
+        [SerializeField] private TMP_Text gladiatorHitChance;
 
         private Gladiator _gladiator;
         
@@ -21,7 +22,7 @@ namespace GameScripts.Arena
             _gladiator = g;
             
             UIGenerator.SetGladiatorStats
-                (g, gladiatorNameTMP, healthTMP, attackDamageTMP, armorTMP);
+                (g, gladiatorNameTMP, healthTMP, attackDamageTMP, armorTMP, gladiatorHitChance);
         }
 
         public void Choose()

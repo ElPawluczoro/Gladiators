@@ -39,6 +39,7 @@ namespace GameScripts.UI
         [SerializeField] private TMP_Text healthTMP;
         [SerializeField] private TMP_Text attackDamageTMP;
         [SerializeField] private TMP_Text armorTMP;
+        [SerializeField] private TMP_Text gladiatorHitChance;
         
         //start cancel panel
         [SerializeField] private GameObject startCancelPanel;
@@ -142,7 +143,7 @@ namespace GameScripts.UI
             gladiatorPanel.SetActive(true);
 
             UIGenerator.SetGladiatorStats
-                (gladiator, gladiatorNameTMP, healthTMP, attackDamageTMP, armorTMP);
+                (gladiator, gladiatorNameTMP, healthTMP, attackDamageTMP, armorTMP, gladiatorHitChance);
         }
 
         public void StartDuel()

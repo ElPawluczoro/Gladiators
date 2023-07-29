@@ -12,6 +12,7 @@ namespace GameScripts.UI
         [SerializeField] private TMP_Text gladiatorHealthTMP;
         [SerializeField] private TMP_Text gladiatorAttackDamageTMP;
         [SerializeField] private TMP_Text gladiatorArmorTMP;
+        [SerializeField] private TMP_Text gladiatorHitChance;
         [SerializeField] private TMP_Text gladiatorSalaryTMP;
 
         [SerializeField] private GameObject statusPanelContent;
@@ -24,7 +25,8 @@ namespace GameScripts.UI
             gladiatorAttackDamageTMP.text = gladiator.attackDamage.ToString();
             gladiatorArmorTMP.text = gladiator.armor.ToString();*/
             UIGenerator.SetGladiatorStats
-                        (gladiator, gladiatorNameTMP, gladiatorHealthTMP, gladiatorAttackDamageTMP, gladiatorArmorTMP);
+                        (gladiator, gladiatorNameTMP, gladiatorHealthTMP, 
+                            gladiatorAttackDamageTMP, gladiatorArmorTMP, gladiatorHitChance);
             gladiatorSalaryTMP.text = gladiator.salary.ToString();
 
             if (gladiator.tired)

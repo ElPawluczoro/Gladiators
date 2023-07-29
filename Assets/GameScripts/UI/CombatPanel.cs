@@ -14,9 +14,6 @@ namespace GameScripts.UI
         private GameObject enemyGO;
         private Gladiator enemyGladiator;
 
-        private int playerGladiatorCurrentHP;
-        private int enemyCurrentHP;
-
         [SerializeField] private GameObject gladiatorPrefab; 
         [SerializeField] private GameObject gladiatorsGO;
 
@@ -25,6 +22,9 @@ namespace GameScripts.UI
 
         [SerializeField] private TMP_Text playerHealthTMP;
         [SerializeField] private TMP_Text enemyHealthTMP;
+
+        [SerializeField] private TMP_Text playerHitText;
+        [SerializeField] private TMP_Text enemyHitText;
 
         [SerializeField] private GameObject winnerText;
         [SerializeField] private Button nextRoundButton;
@@ -52,6 +52,7 @@ namespace GameScripts.UI
             ResetEnemy();
             ResetDuel();
             ResetGladiator();
+            ResetHitTexts();
         }
         
         public void SetGladiator(Gladiator g)
@@ -102,31 +103,56 @@ namespace GameScripts.UI
 
         public void InitiateHP()
         {
-            playerGladiatorCurrentHP = currentGladiator.healthPoints;
-            enemyCurrentHP = enemyGladiator.healthPoints;
+            currentGladiator.currentHealthPoints = currentGladiator.healthPoints;
+            enemyGladiator.currentHealthPoints = enemyGladiator.healthPoints;
         }
 
         public void UpdateHealthTexts()
         {
-            playerHealthTMP.text = playerGladiatorCurrentHP + "/" + currentGladiator.healthPoints;
-            enemyHealthTMP.text = enemyCurrentHP + "/" + enemyGladiator.healthPoints;
+            playerHealthTMP.text = currentGladiator.currentHealthPoints + "/" + currentGladiator.healthPoints;
+            enemyHealthTMP.text = enemyGladiator.currentHealthPoints + "/" + enemyGladiator.healthPoints;
         }
 
         public void Attack()
         {
-            enemyCurrentHP -= currentGladiator.attackDamage;
-            playerGladiatorCurrentHP -= enemyGladiator.attackDamage;
+            var playerHit = Random.Range(1, 100);
+            var enemyHit = Random.Range(1, 100);
+            if (playerHit <= currentGladiator.hitChance)
+            {
+                DealDamage(currentGladiator, enemyGladiator);
+                playerHitText.text = "Hit!";
+            }
+            else
+            {
+                playerHitText.text = "Miss";
+            }
+
+            if (enemyHit <= enemyGladiator.hitChance)
+            {
+                DealDamage(enemyGladiator, currentGladiator);
+                enemyHitText.text = "Hit!";
+            }
+            else
+            {
+                enemyHitText.text = "Miss";
+            }
             UpdateHealthTexts();
 
-            if (playerGladiatorCurrentHP <= 0 || enemyCurrentHP <= 0)
+            if (currentGladiator.currentHealthPoints <= 0 || enemyGladiator.currentHealthPoints <= 0)
             {
                 CombatEnd();
             }
         }
 
+        private void DealDamage(Gladiator attacker, Gladiator target)
+        {
+            target.currentHealthPoints -= (int)(attacker.attackDamage - attacker.attackDamage * target.damageReduction);
+            print(target.damageReduction);
+        }
+
         public void SkipCombat()
         {
-            while (playerGladiatorCurrentHP > 0 && enemyCurrentHP > 0)
+            while (currentGladiator.currentHealthPoints > 0 && enemyGladiator.currentHealthPoints > 0)
             {
                 Attack();
             }
@@ -146,17 +172,17 @@ namespace GameScripts.UI
             winnerText.SetActive(true);
             var winnerTMP = winnerText.GetComponent<TMP_Text>();
             winnerTMP.enabled = true;
-            if (playerGladiatorCurrentHP <= 0 && enemyCurrentHP <= 0)
+            if (currentGladiator.currentHealthPoints <= 0 && enemyGladiator.currentHealthPoints <= 0)
             {
                 winnerTMP.color = Color.red;
                 winnerTMP.text = "Tie";
             }
-            else if (playerGladiatorCurrentHP <= 0)
+            else if (currentGladiator.currentHealthPoints <= 0)
             {
                 winnerTMP.color = Color.red;
                 winnerTMP.text = enemyGladiator.gladiatorName + " Won!";
             }
-            else if (enemyCurrentHP <= 0)
+            else if (enemyGladiator.currentHealthPoints <= 0)
             {
                 winnerTMP.color = Color.green;
                 winnerTMP.text = currentGladiator.gladiatorName + " Won!";
@@ -165,7 +191,7 @@ namespace GameScripts.UI
 
         public void GiveReward()
         {
-            if (playerGladiatorCurrentHP > 0)
+            if (currentGladiator.currentHealthPoints > 0)
             {
                 var reward = Random.Range(currentDuel.minReward, currentDuel.maxReward);
                 CoinsController.AddCoins(reward);
@@ -183,6 +209,12 @@ namespace GameScripts.UI
         {
             rewardTextGo.SetActive(false);
             rewardTextGo.GetComponent<TMP_Text>().text = " ";
+        }
+
+        public void ResetHitTexts()
+        {
+            playerHitText.text = " ";
+            enemyHitText.text = " ";
         }
         
     }

@@ -9,16 +9,26 @@ namespace GameScripts.Gladiators
     public class Gladiator : MonoBehaviour
     {
         //stats
-        [SerializeField] private string _gladiatorName;
+        private string _gladiatorName;
         public string gladiatorName{ get => _gladiatorName; }
         
-        [SerializeField] private int _healthPoints, _attackDamage, _armor;
+        private int _healthPoints, _attackDamage, _armor;
+        private float _damageReduction;
         public int healthPoints { get => _healthPoints; }
+
+        public int currentHealthPoints;
+        
         public int attackDamage { get => _attackDamage; }
         public int armor { get => _armor; }
         
+        public float damageReduction { get => _damageReduction; }
+
+        private int _hitChance = 75;
+        public int hitChance { get => _hitChance; }
+        
+        
         //level
-        [SerializeField] private int _gladiatorLevel = 1;
+        private int _gladiatorLevel = 1;
         public int gladiatorLevel { get => _gladiatorLevel; }
 
         //costs
@@ -44,6 +54,19 @@ namespace GameScripts.Gladiators
 
             var salaryMultiplier = Random.Range(0.5f, 1.5f);
             _salary = (int)(_buyCost * 0.1f * salaryMultiplier);
+
+            SetDamageReduction();
+        }
+
+        private void SetDamageReduction()
+        {
+            _damageReduction = 0;
+            var reduction = 0.02f;
+            for (int i = 0; i < _armor; i++)
+            {
+                _damageReduction += reduction;
+                reduction = reduction * 0.9f;
+            }
         }
 
         public void SetGladiatorProperties(Gladiator gladiator)

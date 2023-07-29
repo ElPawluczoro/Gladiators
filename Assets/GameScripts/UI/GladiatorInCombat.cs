@@ -12,10 +12,12 @@ namespace GameScripts.UI
         [SerializeField] private TMP_Text healthTMP;
         [SerializeField] private TMP_Text attackDamageTMP;
         [SerializeField] private TMP_Text armorTMP;
+        [SerializeField] private TMP_Text gladiatorHitChance;
         
         public void LoadGladiator(Gladiator gladiator)
         {
-            UIGenerator.SetGladiatorStats(gladiator, gladiatorNameTMP, healthTMP, attackDamageTMP, armorTMP);
+            UIGenerator.SetGladiatorStats(gladiator, gladiatorNameTMP, healthTMP, attackDamageTMP, armorTMP,
+                gladiatorHitChance);
         }
         
     }
