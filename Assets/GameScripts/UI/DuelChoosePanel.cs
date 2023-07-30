@@ -15,16 +15,17 @@ namespace GameScripts.UI
         private void Start()
         {
             InstantiateDuels();
+            duelsContent.SetActive(false);
         }
 
         public void OnPanelOpen()
         {
-            
+            duelsContent.SetActive(true);
         }
 
         public void OnPanelClose()
         {
-            
+            duelsContent.SetActive(false);   
         }
 
         public void InstantiateDuels()

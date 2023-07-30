@@ -25,8 +25,10 @@ namespace GameScripts.UI
             gladiatorsPanelGO.GetComponent<GladiatorsPanel>().OpenGladiatorPanel();
             
             if(gladiatorPanelGO == null) gladiatorPanelGO = GameObject.FindGameObjectWithTag("GladiatorPanel");
-            gladiatorPanelGO.GetComponent<GladiatorPanel>()
-                .SetPanelProperties(gladiator.GetComponent<Gladiator>());
+
+            var gladiatorPanel = gladiatorPanelGO.GetComponent<GladiatorPanel>();
+            gladiatorPanel.ResetPanel();
+            gladiatorPanel.SetPanelProperties(gladiator.GetComponent<Gladiator>());
         }
 
     }

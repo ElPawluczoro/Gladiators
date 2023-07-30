@@ -8,6 +8,7 @@ namespace GameScripts.UI
 {
     public class TooltipsController : MonoBehaviour
     {
+        [SerializeField] private GameObject emptyTooltip;
         [SerializeField] private GameObject lastTooltip;
         private Camera _camera;
 
@@ -18,6 +19,10 @@ namespace GameScripts.UI
 
         private void Update()
         {
+            if (lastTooltip == null)
+            {
+                lastTooltip = emptyTooltip;
+            }
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {

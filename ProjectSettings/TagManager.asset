@@ -9,6 +9,8 @@ TagManager:
   - SlavesStoreController
   - CanvasController
   - ToolTipCanvas
+  - StatusTooltip
+  - TourController
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameScripts.Core;
 using UnityEngine;
 
 namespace GameScripts.UI
@@ -11,10 +13,37 @@ namespace GameScripts.UI
 
         public GameObject duelPanel;
 
+        private bool canSwitchCanvas;
+
+        private void OnEnable()
+        {
+            ToursController.onTourEnd += CloseAllCanvases;
+        }
+        
+        private void OnDisable()
+        {
+            ToursController.onTourEnd -= CloseAllCanvases;
+        }
+
+        private void Start()
+        {
+            canSwitchCanvas = true;
+        }
+
         public void SwitchPanel(GameObject canvas)
         {
+            if (!canSwitchCanvas) return;
+            
             if (currentCanvas == canvas) return;
             currentCanvas = canvas;
+            CloseAllCanvases();
+
+            canvas.GetComponent<Canvas>().enabled = true;
+            canvas.GetComponent<IGamePanel>().OnPanelOpen();
+        }
+
+        public void CloseAllCanvases()
+        {
             foreach (var c in canvases)
             {
                 if (c.GetComponent<Canvas>().enabled)
@@ -23,10 +52,18 @@ namespace GameScripts.UI
                     c.GetComponent<Canvas>().enabled = false;
                 }
             }
-
-            canvas.GetComponent<Canvas>().enabled = true;
-            canvas.GetComponent<IGamePanel>().OnPanelOpen();
         }
+
+        public void BlockCanvasSwitch()
+        {
+            canSwitchCanvas = false;
+        }
+
+        public void UnlockCanvasSwitch()
+        {
+            canSwitchCanvas = true;
+        }
+        
 
     }
 }

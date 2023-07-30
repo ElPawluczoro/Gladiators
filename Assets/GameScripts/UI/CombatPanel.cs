@@ -1,9 +1,11 @@
+using System;
 using GameScripts.Arena;
 using GameScripts.Core;
 using GameScripts.Gladiators;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace GameScripts.UI
 {
@@ -31,6 +33,16 @@ namespace GameScripts.UI
         [SerializeField] private Button skipCombatButton;
         [SerializeField] private GameObject exitButtonGo;
         [SerializeField] private GameObject rewardTextGo;
+
+        private CanvasController canvasController;
+        private ToursController tourController; 
+
+        private void Start()
+        {
+            canvasController = GameObject.FindGameObjectWithTag("CanvasController").GetComponent<CanvasController>();
+            tourController = GameObject.FindGameObjectWithTag("TourController").GetComponent<ToursController>();
+        }
+
         public void OnPanelOpen()
         {
             currentGladiator.SetGladiatorTired(true);
@@ -44,6 +56,8 @@ namespace GameScripts.UI
             winnerText.SetActive(false);
             exitButtonGo.SetActive(false);
             ResetRewardText();
+            canvasController.BlockCanvasSwitch();
+            tourController.BlockNewTour();
 
         }
 
@@ -147,7 +161,6 @@ namespace GameScripts.UI
         private void DealDamage(Gladiator attacker, Gladiator target)
         {
             target.currentHealthPoints -= (int)(attacker.attackDamage - attacker.attackDamage * target.damageReduction);
-            print(target.damageReduction);
         }
 
         public void SkipCombat()
@@ -165,6 +178,9 @@ namespace GameScripts.UI
             skipCombatButton.interactable = false;
             exitButtonGo.SetActive(true);
             GiveReward();
+            canvasController.UnlockCanvasSwitch();
+            tourController.UnlockNewTour();
+            
         }
 
         private void SetWinner()
@@ -196,6 +212,7 @@ namespace GameScripts.UI
                 var reward = Random.Range(currentDuel.minReward, currentDuel.maxReward);
                 CoinsController.AddCoins(reward);
                 SetRewardText(reward);
+                currentGladiator.GetXP(Random.Range(currentDuel.minXP, currentDuel.maxXP));
             }
         }
 

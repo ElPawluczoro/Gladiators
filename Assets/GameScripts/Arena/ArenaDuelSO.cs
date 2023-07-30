@@ -14,6 +14,10 @@ namespace GameScripts.Arena
 
         public int minReward = 50;
         public int maxReward = 100;
+
+        public int minXP = 10;
+        public int maxXP = 20;
+
     }
 }
 

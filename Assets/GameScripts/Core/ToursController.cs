@@ -11,6 +11,8 @@ namespace GameScripts.Core
         [SerializeField] private TMP_Text tourText;
     
         private const string playerPrefTour = "tour";
+
+        private bool canStartNextTour;
         
         public delegate void OnTourEnd();
         public static event OnTourEnd onTourEnd;
@@ -19,10 +21,14 @@ namespace GameScripts.Core
         {
             UpdateTourText();
             onTourEnd?.Invoke();
+
+            canStartNextTour = true;
         }
 
         public void EndTour()
         {
+            if (!canStartNextTour) return;
+            
             var currentTour = PlayerPrefs.GetInt(playerPrefTour, 0);
             PlayerPrefs.SetInt(playerPrefTour, currentTour + 1);
             UpdateTourText();
@@ -34,5 +40,16 @@ namespace GameScripts.Core
         {
             tourText.text = "Tour " + PlayerPrefs.GetInt(playerPrefTour, 0);
         }
+
+        public void BlockNewTour()
+        {
+            canStartNextTour = false;
+        }
+
+        public void UnlockNewTour()
+        {
+            canStartNextTour = true;
+        }
+        
     }
 }

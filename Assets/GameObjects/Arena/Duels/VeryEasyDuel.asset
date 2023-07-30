@@ -17,3 +17,5 @@ MonoBehaviour:
   maxEnemyLevel: 2
   minReward: 35
   maxReward: 75
+  minXP: 45
+  maxXP: 90

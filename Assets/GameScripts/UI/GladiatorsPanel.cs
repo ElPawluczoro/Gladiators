@@ -53,7 +53,7 @@ namespace GameScripts.UI
                 var gladiatorInMenu = newGladiator.GetComponent<GladiatorInMenu>();
                 gladiatorInMenu.gladiator = g;
                 var gladiator = g.GetComponent<Gladiator>();
-                gladiatorInMenu.SetGladiatorText(gladiator.gladiatorName + "Lv." + gladiator.gladiatorLevel);
+                gladiatorInMenu.SetGladiatorText(gladiator.gladiatorName);
             }
         }
 

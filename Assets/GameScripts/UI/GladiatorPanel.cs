@@ -15,20 +15,20 @@ namespace GameScripts.UI
         [SerializeField] private TMP_Text gladiatorHitChance;
         [SerializeField] private TMP_Text gladiatorSalaryTMP;
 
+        [SerializeField] private GameObject xpBar;
+
         [SerializeField] private GameObject statusPanelContent;
         [SerializeField] private GameObject tiredIcon;
 
         public void SetPanelProperties(Gladiator gladiator)
         {
-            /*gladiatorNameTMP.text = gladiator.gladiatorName + " Lv." + gladiator.gladiatorLevel;
-            gladiatorHealthTMP.text = gladiator.healthPoints.ToString();
-            gladiatorAttackDamageTMP.text = gladiator.attackDamage.ToString();
-            gladiatorArmorTMP.text = gladiator.armor.ToString();*/
             UIGenerator.SetGladiatorStats
                         (gladiator, gladiatorNameTMP, gladiatorHealthTMP, 
                             gladiatorAttackDamageTMP, gladiatorArmorTMP, gladiatorHitChance);
             gladiatorSalaryTMP.text = gladiator.salary.ToString();
 
+            xpBar.GetComponent<XPBar>().SetBar(gladiator.currentXP, gladiator.maxXP);
+            
             if (gladiator.tired)
             {
                 Instantiate(tiredIcon, statusPanelContent.transform);
@@ -42,6 +42,8 @@ namespace GameScripts.UI
             gladiatorHealthTMP.text = "";
             gladiatorAttackDamageTMP.text = "";
             gladiatorArmorTMP.text = "";
+            
+            xpBar.GetComponent<XPBar>().SetBar(0, 1);
 
             foreach (Transform child in statusPanelContent.transform)
             {

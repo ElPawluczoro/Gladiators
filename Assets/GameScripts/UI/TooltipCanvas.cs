@@ -7,5 +7,6 @@ namespace GameScripts.UI
     public class TooltipCanvas : MonoBehaviour
     {
         [SerializeField] public GameObject statusTooltip;
+        [SerializeField] public GameObject statToolTip;
     }
 }

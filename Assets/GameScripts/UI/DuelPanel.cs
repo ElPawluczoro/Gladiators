@@ -28,6 +28,8 @@ namespace GameScripts.UI
         private PlayerGladiators _playerGladiators;
         
         //duel panel
+        [SerializeField] private GameObject duelInfoPanel;
+        
         [SerializeField] private TMP_Text duelDifficultyTMP;
         [SerializeField] private TMP_Text duelLevelsTMP;
         [SerializeField] private TMP_Text duelRewardTMP;
@@ -52,10 +54,12 @@ namespace GameScripts.UI
             _playerGladiators = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGladiators>();
             HideGladiatorPanel();
             HideStartCancelPanel();
+            duelInfoPanel.SetActive(false);
         }
 
         public void OnPanelOpen()
         {
+            duelInfoPanel.SetActive(true);
             InstantiatePlayerGladiators();
             SetDuelProperties();
         }
@@ -67,6 +71,7 @@ namespace GameScripts.UI
             ResetDuel();
             ResetGladiator();
             HideGladiatorPanel();
+            duelInfoPanel.SetActive(false);
         }
 
         private void InstantiatePlayerGladiators()
