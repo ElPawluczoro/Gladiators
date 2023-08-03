@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using GameScripts.Gladiators;
+using GameScripts.Items;
 using TMPro;
 using UnityEngine;
 
@@ -15,25 +16,35 @@ namespace GameScripts.UI
         [SerializeField] private TMP_Text gladiatorHitChance;
         [SerializeField] private TMP_Text gladiatorSalaryTMP;
 
+        [SerializeField] private ItemSlot helmetSlot;
+        [SerializeField] private ItemSlot weaponSlot;
+        [SerializeField] private ItemSlot chestSlot;
+
         [SerializeField] private GameObject xpBar;
+        [SerializeField] private TMP_Text xpBarText;
 
         [SerializeField] private GameObject statusPanelContent;
         [SerializeField] private GameObject tiredIcon;
 
+        public Gladiator currentGladiator;
+
         public void SetPanelProperties(Gladiator gladiator)
         {
+            currentGladiator = gladiator;
+            
             UIGenerator.SetGladiatorStats
                         (gladiator, gladiatorNameTMP, gladiatorHealthTMP, 
                             gladiatorAttackDamageTMP, gladiatorArmorTMP, gladiatorHitChance);
             gladiatorSalaryTMP.text = gladiator.salary.ToString();
 
-            xpBar.GetComponent<XPBar>().SetBar(gladiator.currentXP, gladiator.maxXP);
+            xpBar.GetComponent<ProgressBar>().SetBar(gladiator.currentXP, gladiator.maxXP, xpBarText);
             
             if (gladiator.tired)
             {
                 Instantiate(tiredIcon, statusPanelContent.transform);
             }
-            
+
+            InitiateEquipment();
         }
 
         public void ResetPanel()
@@ -43,12 +54,19 @@ namespace GameScripts.UI
             gladiatorAttackDamageTMP.text = "";
             gladiatorArmorTMP.text = "";
             
-            xpBar.GetComponent<XPBar>().SetBar(0, 1);
+            xpBar.GetComponent<ProgressBar>().SetBar(0, 1, xpBarText);
 
             foreach (Transform child in statusPanelContent.transform)
             {
                 Destroy(child.gameObject);
             }
+        }
+
+        public void InitiateEquipment()
+        {
+            helmetSlot.SetItem(currentGladiator.helmet);
+            weaponSlot.SetItem(currentGladiator.weapon);
+            chestSlot.SetItem(currentGladiator.chest);
         }
 
     }

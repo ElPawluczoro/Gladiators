@@ -1,6 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using GameScripts.Items;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 // ReSharper disable ConvertToAutoProperty
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -26,6 +27,10 @@ namespace GameScripts.Gladiators
         private int _hitChance = 75;
         public int hitChance { get => _hitChance; }
         
+        //items
+
+        public Item helmet, chest, weapon;
+        private int lastAD = 0, lastHP = 0, lastArmor = 0;
         
         //level
         private int _gladiatorLevel = 1;
@@ -54,8 +59,15 @@ namespace GameScripts.Gladiators
         //status
         private bool _tired;
         public bool tired { get => _tired; }
-        
-        
+
+        private void Start()
+        {
+            var itemsTransform = GameObject.FindGameObjectWithTag("Items").transform;
+            helmet = itemsTransform.GetChild(0).GetComponent<Item>();
+            weapon = itemsTransform.GetChild(1).GetComponent<Item>();
+            chest = itemsTransform.GetChild(2).GetComponent<Item>();
+        }
+
         public void SetGladiatorProperties(string n, int hp, int ad, int lv)
         {
             _gladiatorName = n;
@@ -121,7 +133,63 @@ namespace GameScripts.Gladiators
             }
         }
 
+        public void EquipItem(Item item)
+        {
+            switch (item.GetItemKind())
+            {
+                case ItemKind.HELMET:
+                    helmet = item;
+                    break;
+                case ItemKind.WEAPON:
+                    weapon = item;
+                    break;
+                case ItemKind.CHEST:
+                    chest = item;
+                    break;
+            }
+            
+            UpdateStatsFromItems();
+        }
 
+        public void UpdateStatsFromItems()
+        {
+            var ad_ = 0;
+            var hp_ = 0;
+            var armor_ = 0;
+
+            _attackDamage -= lastAD;
+            _healthPoints -= lastHP;
+            _armor -= lastArmor;
+
+            if (helmet != null)
+            {
+                ad_ += helmet.attackDamage;
+                hp_ += helmet.healthPoints;
+                armor_ += helmet.armor;
+            }
+            
+            if (weapon != null)
+            {
+                ad_ += weapon.attackDamage;
+                hp_ += weapon.healthPoints;
+                armor_ += weapon.armor;
+            }
+
+            if (chest != null)
+            {
+                ad_ += chest.attackDamage;
+                hp_ += chest.healthPoints;
+                armor_ += chest.armor;
+            }
+            
+            _attackDamage += ad_;
+            _healthPoints += hp_;
+            _armor += armor_;
+            
+            lastAD = ad_;
+            lastHP = hp_;
+            lastArmor = armor_;
+        }
     }
 }
 

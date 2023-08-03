@@ -11,6 +11,7 @@ TagManager:
   - ToolTipCanvas
   - StatusTooltip
   - TourController
+  - ItemChoosePanel
   layers:
   - Default
   - TransparentFX

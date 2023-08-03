@@ -17,12 +17,12 @@ namespace GameScripts.UI
 
         private void OnEnable()
         {
-            ToursController.onTourEnd += CloseAllCanvases;
+            ToursController.onTourEnd += OnTourEndBehaviour;
         }
         
         private void OnDisable()
         {
-            ToursController.onTourEnd -= CloseAllCanvases;
+            ToursController.onTourEnd -= OnTourEndBehaviour;
         }
 
         private void Start()
@@ -42,7 +42,7 @@ namespace GameScripts.UI
             canvas.GetComponent<IGamePanel>().OnPanelOpen();
         }
 
-        public void CloseAllCanvases()
+        private void CloseAllCanvases()
         {
             foreach (var c in canvases)
             {
@@ -52,6 +52,12 @@ namespace GameScripts.UI
                     c.GetComponent<Canvas>().enabled = false;
                 }
             }
+        }
+
+        private void OnTourEndBehaviour()
+        {
+            CloseAllCanvases();
+            currentCanvas = null;
         }
 
         public void BlockCanvasSwitch()
