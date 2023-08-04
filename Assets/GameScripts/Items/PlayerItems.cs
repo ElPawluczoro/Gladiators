@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 // ReSharper disable FunctionRecursiveOnAllPaths
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -17,6 +15,11 @@ namespace GameScripts.Items
             return playerItems;
         }
 
+        public void AddItem(GameObject item)
+        {
+            playerItems.Add(item.GetComponent<Item>());
+        }
+        
         public void AddItem(Item item)
         {
             playerItems.Add(item);

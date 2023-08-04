@@ -12,6 +12,9 @@ TagManager:
   - StatusTooltip
   - TourController
   - ItemChoosePanel
+  - Items
+  - WeaponSmith
+  - ItemGenerator
   layers:
   - Default
   - TransparentFX

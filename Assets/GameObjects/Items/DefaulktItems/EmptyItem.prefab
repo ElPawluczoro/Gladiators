@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7916157373761259629}
   - component: {fileID: 3309378069966580571}
   m_Layer: 0
-  m_Name: SampleItem 2
+  m_Name: EmptyItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemKind: 2
-  _itemName: Helmet2
+  _itemName: empty
   _attackDamage: 0
-  _healthPoints: 5
-  _armor: 5
-  itemIcon: {fileID: 21300000, guid: 652aeca7595a90b49862ca7486eb2f2c, type: 3}
+  _healthPoints: 0
+  _armor: 0
+  itemIcon: {fileID: 21300000, guid: 50c88dc7cdf4d5b45932c007e0841b47, type: 3}

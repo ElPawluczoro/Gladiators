@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using GameScripts.Gladiators;
 using GameScripts.UI;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
