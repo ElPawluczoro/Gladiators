@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7865943924780613106}
   - component: {fileID: 7865943924780613107}
   - component: {fileID: 3617495577047795396}
-  - component: {fileID: 11479995517083790}
+  - component: {fileID: 357273305319740223}
   m_Layer: 0
   m_Name: HCIcon
   m_TagString: Untagged
@@ -91,7 +91,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 79.78608, y: 79.78613, z: 1.0001526}
   m_Center: {x: 0.09583855, y: -0.09583855, z: -0.00007629208}
---- !u!114 &11479995517083790
+--- !u!114 &357273305319740223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7865943924780613105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe90d6a372e4174cb173bad720e9963, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d25ed2f849f06249b33064f5ed8bd2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   toolTipText: Hit chance
+  mod: 0.0091

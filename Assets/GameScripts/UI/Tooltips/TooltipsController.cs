@@ -26,7 +26,7 @@ namespace GameScripts.UI
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                var tooltipComponent = hit.transform.gameObject.GetComponent<Tooltip>();
+                var tooltipComponent = hit.transform.gameObject.GetComponent<ITooltip>();
                 if (tooltipComponent != null)
                 {
                     lastTooltip = hit.transform.gameObject;
@@ -35,7 +35,7 @@ namespace GameScripts.UI
             }
             else if (lastTooltip.activeSelf)
             {
-                lastTooltip.GetComponent<Tooltip>().HideToolTip();
+                lastTooltip.GetComponent<ITooltip>().HideToolTip();
             }
         }
     }

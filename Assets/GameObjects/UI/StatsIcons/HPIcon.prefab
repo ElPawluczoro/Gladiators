@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1907222451471053303}
   - component: {fileID: 1907222451471053305}
   - component: {fileID: 1907222451471053304}
-  - component: {fileID: 1907222451471053306}
   - component: {fileID: 1907222451471053307}
+  - component: {fileID: 6388052764439366896}
   m_Layer: 0
   m_Name: HPIcon
   m_TagString: Untagged
@@ -78,22 +78,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1907222451471053306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907222451471053302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe90d6a372e4174cb173bad720e9963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toolTipText: 'Health
-
-    Tells how much damage gladiator can take, if turns to
-    0 or belove gladiator can get injured or even die'
 --- !u!65 &1907222451471053307
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -107,3 +91,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 79.91252, y: 80.03119, z: 1}
   m_Center: {x: 0.04020095, y: -0.0000032186508, z: 0}
+--- !u!114 &6388052764439366896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907222451471053302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d25ed2f849f06249b33064f5ed8bd2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toolTipText: 'Health
+
+    Tells how much damage gladiator can take, if turns to
+    0 or belove gladiator can get injured or even die'
+  mod: 0.0091

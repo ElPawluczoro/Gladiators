@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6715103967369047952}
   - component: {fileID: 6715103967369047953}
   - component: {fileID: 3997932871098440037}
-  - component: {fileID: 317349255922976467}
+  - component: {fileID: -3193474112124547780}
   m_Layer: 0
   m_Name: DuelRewardsIcon
   m_TagString: Untagged
@@ -91,7 +91,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 44.99566, y: 44.99567, z: 1}
   m_Center: {x: -0.000025749207, y: 0.0000064373016, z: 0}
---- !u!114 &317349255922976467
+--- !u!114 &-3193474112124547780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6715103967369047959}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe90d6a372e4174cb173bad720e9963, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d25ed2f849f06249b33064f5ed8bd2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   toolTipText: PossibleReward
+  mod: 0.0091

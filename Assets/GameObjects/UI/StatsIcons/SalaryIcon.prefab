@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1556959154587159008}
   - component: {fileID: 1556959154587159011}
   - component: {fileID: 1556959154587159022}
-  - component: {fileID: 1556959154587159009}
+  - component: {fileID: -4962947912764646134}
   m_Layer: 0
   m_Name: SalaryIcon
   m_TagString: Untagged
@@ -91,7 +91,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 60.1642, y: 60.16423, z: 1.0001526}
   m_Center: {x: -0.2966212, y: 0.034954548, z: -0.00007629208}
---- !u!114 &1556959154587159009
+--- !u!114 &-4962947912764646134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1556959154587159013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe90d6a372e4174cb173bad720e9963, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d25ed2f849f06249b33064f5ed8bd2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   toolTipText: Salary per tour
+  mod: 0.0091

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace GameScripts.UI
+namespace GameScripts.UI.Tooltips
 {
-    public class CoinsTooltip : MonoBehaviour, Tooltip
+    public class CoinsTooltip : MonoBehaviour, ITooltip
     {
         [SerializeField] private GameObject tooltipBox;
         [SerializeField] private TMP_Text salaryTMP;
