@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace GameScripts.UI
 {
-    public class WeaponSmithPanel : MonoBehaviour, IGamePanel
+    public class ItemStorePanel : MonoBehaviour, IGamePanel
     {
         private List<GameObject> itemsInShop = new List<GameObject>();
 
@@ -19,6 +19,8 @@ namespace GameScripts.UI
 
         [SerializeField] private GameObject storeContent;
         [SerializeField] private ItemGenerator itemGenerator;
+
+        [SerializeField] private StoreKind storeKind;
 
         private void OnEnable()
         {
@@ -52,9 +54,17 @@ namespace GameScripts.UI
 
         private void GenerateNewShop()
         {
+            ItemKind ik;
             for (int i = 0; i < Random.Range(minItems, maxItems); i++)
             {
-                var newItem = itemGenerator.GenerateNewWeapon();
+                if (storeKind == StoreKind.WEAPON_SMITH) ik = ItemKind.WEAPON;
+                else
+                {
+                    var randomNum = Random.Range(1, 3);
+                    if (randomNum == 1) ik = ItemKind.CHEST;
+                    else ik = ItemKind.HELMET;
+                }
+                var newItem = itemGenerator.GenerateNewItem(ik);
                 itemsInShop.Add(newItem);
             }
         }
@@ -104,11 +114,11 @@ namespace GameScripts.UI
         {
             storeContent.SetActive(false);
         }
+    }
 
-
-
-
-
-
+    public enum StoreKind
+    {
+        WEAPON_SMITH, ARMORER
     }
 }
+

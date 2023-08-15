@@ -42,6 +42,8 @@ namespace GameScripts.UI.Tooltips
                     break;
             }
 
+            
+            
             var txt = "";
             txt += item.itemName + "\n";
             if(item.healthPoints != 0) { txt += item.healthPoints + "hp" + "\n"; }

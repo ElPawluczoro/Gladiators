@@ -15,6 +15,7 @@ TagManager:
   - Items
   - WeaponSmith
   - ItemGenerator
+  - Armorer
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using GameScripts.Core;
 using GameScripts.Items;
 using TMPro;
@@ -36,7 +34,14 @@ namespace GameScripts.UI
             if (!CoinsController.IsCoinsEnough(cost)) return;
             CoinsController.SpendCoins(cost);
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerItems>().AddItem(itemGo);
-            GameObject.FindGameObjectWithTag("WeaponSmith").GetComponent<WeaponSmithPanel>().RemoveItemFromStore(itemGo);
+            if (itemGo.GetComponent<Item>().GetItemKind() == ItemKind.WEAPON)
+            {
+                GameObject.FindGameObjectWithTag("WeaponSmith").GetComponent<ItemStorePanel>().RemoveItemFromStore(itemGo);
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("Armorer").GetComponent<ItemStorePanel>().RemoveItemFromStore(itemGo);
+            }
         }
 
         public void SetItem(GameObject itGo)
