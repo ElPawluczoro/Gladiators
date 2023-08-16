@@ -189,6 +189,8 @@ namespace GameScripts.Gladiators
             lastAD = ad_;
             lastHP = hp_;
             lastArmor = armor_;
+            
+            SetDamageReduction();
         }
     }
 }
