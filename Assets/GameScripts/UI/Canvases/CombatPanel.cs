@@ -33,6 +33,7 @@ namespace GameScripts.UI
         [SerializeField] private Button skipCombatButton;
         [SerializeField] private GameObject exitButtonGo;
         [SerializeField] private GameObject rewardTextGo;
+        [SerializeField] private GameObject expTextGo;
 
         private CanvasController canvasController;
         private ToursController tourController; 
@@ -55,7 +56,8 @@ namespace GameScripts.UI
             skipCombatButton.interactable = true;
             winnerText.SetActive(false);
             exitButtonGo.SetActive(false);
-            ResetRewardText();
+            ResetRewardsText(rewardTextGo);
+            ResetRewardsText(expTextGo);
             canvasController.BlockCanvasSwitch();
             tourController.BlockNewTour();
 
@@ -211,21 +213,25 @@ namespace GameScripts.UI
             {
                 var reward = Random.Range(currentDuel.minReward, currentDuel.maxReward);
                 CoinsController.AddCoins(reward);
-                SetRewardText(reward);
-                currentGladiator.GetXP(Random.Range(currentDuel.minXP, currentDuel.maxXP));
+
+                var xpGained = Random.Range(currentDuel.minXP, currentDuel.maxXP);
+                
+                currentGladiator.GetXP(xpGained);
+                SetRewardsText(rewardTextGo, reward, "coins");
+                SetRewardsText(expTextGo, xpGained, "XP");
             }
         }
 
-        public void SetRewardText(int reward)
+        public void SetRewardsText(GameObject textGo, int reward, string text)
         {
-            rewardTextGo.SetActive(true);
-            rewardTextGo.GetComponent<TMP_Text>().text = "+ " + reward + "coins";
+            textGo.SetActive(true);
+            textGo.GetComponent<TMP_Text>().text = "+ " + reward + " " + text;
         }
 
-        public void ResetRewardText()
+        public void ResetRewardsText(GameObject textGo)
         {
-            rewardTextGo.SetActive(false);
-            rewardTextGo.GetComponent<TMP_Text>().text = " ";
+            textGo.SetActive(false);
+            textGo.GetComponent<TMP_Text>().text = " ";
         }
 
         public void ResetHitTexts()
