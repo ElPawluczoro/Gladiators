@@ -16,6 +16,7 @@ TagManager:
   - WeaponSmith
   - ItemGenerator
   - Armorer
+  - JobsController
   layers:
   - Default
   - TransparentFX

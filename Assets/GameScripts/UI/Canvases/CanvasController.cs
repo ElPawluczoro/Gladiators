@@ -12,6 +12,7 @@ namespace GameScripts.UI
         private GameObject currentCanvas;
 
         public GameObject duelPanel;
+        public GameObject jobPanel;
 
         private bool canSwitchCanvas;
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using GameScripts.Arena;
 using GameScripts.Core;
 using GameScripts.Gladiators;
+using GameScripts.Jobs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -76,8 +77,12 @@ namespace GameScripts.UI
 
         private void InstantiatePlayerGladiators()
         {
+            var assignedGladiators = 
+                GameObject.FindGameObjectWithTag("JobsController").GetComponent<JobsController>().
+                                                                                                GetAssignedGladiators();
             foreach (var g in _playerGladiators.playerGladiatorsList)
             {
+                if(assignedGladiators.Contains(g.GetComponent<Gladiator>())) continue;
                 var newGladiatorInDuel = Instantiate(gladiatorGo, gladiatorsContent.transform);
                 newGladiatorInDuel.GetComponent<GladiatorInDuel>().SetProperties(g.GetComponent<Gladiator>());
             }
