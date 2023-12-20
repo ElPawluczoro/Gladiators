@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using GameScripts.Core;
 using GameScripts.Items;
+using GameScripts.Jobs;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -57,16 +60,34 @@ namespace GameScripts.Gladiators
         public int salary { get => _salary; }
         
         //status
+        public bool isLastJobFarmer = false;
+        [SerializeField] private int farmerStacks = 0;
+        private int maxFarmerStacks = 3;
+        [SerializeField]private bool moreLikeFarmer = false;
+        private bool removingFarmerStacks = false;
+        
+        public bool MoreLikeFarmer { get => moreLikeFarmer; }
+        
         private bool _tired;
         public bool tired { get => _tired; }
-
+        
+        //Jobs
+        public Dictionary<EJobs, int> bonusJobsGold = new();
         private void Start()
         {
+            InitializeJobs();
             var itemsTransform = GameObject.FindGameObjectWithTag("Items").transform;
             helmet = itemsTransform.GetChild(0).GetComponent<Item>();
             weapon = itemsTransform.GetChild(1).GetComponent<Item>();
             chest = itemsTransform.GetChild(2).GetComponent<Item>();
+            ToursController.onTourEnd += CheckForStacks;
         }
+
+        public void InitializeJobs()
+        {
+            bonusJobsGold.Add(EJobs.FARMER, 0);
+        }
+        
 
         public void SetGladiatorProperties(string n, int hp, int ad, int lv)
         {
@@ -110,6 +131,68 @@ namespace GameScripts.Gladiators
         public void SetGladiatorTired(bool t)
         {
             _tired = t;
+        }
+
+        private void CheckForStacks()
+        {
+            CheckForFarmerStacks();
+        }
+
+        private void CheckForFarmerStacks()
+        {
+            if (farmerStacks == 0) return;
+            if (!isLastJobFarmer && !removingFarmerStacks)
+            {
+                ToursController.onTourEnd += RemoveFarmerStacks;
+                removingFarmerStacks = true;
+            }
+
+            if (!moreLikeFarmer && farmerStacks == 0)
+            {
+                ToursController.onTourEnd -= RemoveFarmerStacks;
+                removingFarmerStacks = false;
+            }
+        }
+
+        public void AddFarmerStacks()
+        {
+            if (farmerStacks < maxFarmerStacks)
+            {
+                farmerStacks++;
+            }
+
+            if (farmerStacks == maxFarmerStacks)
+            {
+                AddMoreLikeFarmerStatus();
+            }
+        }
+
+        private void AddMoreLikeFarmerStatus()
+        {
+            moreLikeFarmer = true;
+            _hitChance -= 25;
+            bonusJobsGold[EJobs.FARMER] = 10;
+        }
+
+        private void RemoveMoreLikeFarmerStatus()
+        {
+            moreLikeFarmer = false;
+            _hitChance += 25;
+            bonusJobsGold[EJobs.FARMER] = 0;
+        }
+        
+        public void RemoveFarmerStacks()
+        {
+            if(isLastJobFarmer) return;
+            if (farmerStacks > 0)
+            {
+                farmerStacks--;
+            }
+
+            if (farmerStacks == 0)
+            {
+                RemoveMoreLikeFarmerStatus();
+            }
         }
 
         public void GetXP(int amount)

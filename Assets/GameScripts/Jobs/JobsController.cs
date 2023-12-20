@@ -11,11 +11,18 @@ namespace GameScripts.Jobs
     public class JobsController : MonoBehaviour
     {
         [SerializeField] private List<SOJob> jobsAvailable;
-        private Dictionary<SOJob, Gladiator> jobs = new ();
+        private static Dictionary<SOJob, Gladiator> jobs = new ();
         private Random random;
+
+        private PlayerGladiators playerGladiators;
+
+        private static SOJob _farmJob; 
+        [SerializeField] private SOJob farmJob; 
         
         private void Start()
         {
+            playerGladiators = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGladiators>();
+            _farmJob = farmJob;
             random = new Random();
             
             ToursController.onTourEnd += OnTourEnd;
@@ -26,6 +33,11 @@ namespace GameScripts.Jobs
             }
         }
 
+        public static Gladiator GetFarmer()
+        {
+            return jobs[_farmJob];
+        }
+
         public void AssignGladiator(SOJob job, Gladiator gladiator)
         {
             jobs[job] = gladiator;
@@ -33,6 +45,8 @@ namespace GameScripts.Jobs
 
         public void OnTourEnd()
         {
+            AddFarmerStacks();
+            UpdateGladiatorsJobs();
             GetSalaryFromJobs();
             ResetGladiatorAssignation();
         }
@@ -51,13 +65,18 @@ namespace GameScripts.Jobs
             {
                 if (job.Value != null)
                 {
-                    CoinsController.
-                        AddCoins(
-                            random.Next(job.Key._MinimumDefaultSalary, job.Key._MaximumDefaultSalary) +
-                                             job.Key._SalaryPerLevel * job.Value.gladiatorLevel
-                            );
+                    CoinsController.AddCoins(
+                        random.Next(job.Key._MinimumDefaultSalary, job.Key._MaximumDefaultSalary) +
+                        job.Key._SalaryPerLevel * job.Value.gladiatorLevel + job.Value.bonusJobsGold[job.Key.Job]
+                    );
                 }
             }
+        }
+
+        private void AddFarmerStacks()
+        {
+            if (jobs[farmJob] == null) return;
+            jobs[farmJob].AddFarmerStacks();
         }
 
         public Gladiator GetCurrentlyChosenGladiator(SOJob job)
@@ -83,5 +102,22 @@ namespace GameScripts.Jobs
 
             return gladiators;
         }
+
+        public void SetGladiatorsLastFarmer()
+        {
+            if(jobs[farmJob] == null) return;
+            jobs[farmJob].isLastJobFarmer = true;
+        }
+
+        public void UpdateGladiatorsJobs()
+        {
+            foreach (GameObject gladiator in playerGladiators.playerGladiatorsList)
+            {
+                gladiator.GetComponent<Gladiator>().isLastJobFarmer = false;
+            }
+
+            SetGladiatorsLastFarmer();
+        }
+        
     }   
 }

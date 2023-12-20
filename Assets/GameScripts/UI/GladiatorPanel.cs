@@ -25,6 +25,7 @@ namespace GameScripts.UI
 
         [SerializeField] private GameObject statusPanelContent;
         [SerializeField] private GameObject tiredIcon;
+        [SerializeField] private GameObject moreLikeFarmerIcon;
 
         public Gladiator currentGladiator;
 
@@ -42,6 +43,11 @@ namespace GameScripts.UI
             if (gladiator.tired)
             {
                 Instantiate(tiredIcon, statusPanelContent.transform);
+            }
+
+            if (gladiator.MoreLikeFarmer)
+            {
+                Instantiate(moreLikeFarmerIcon, statusPanelContent.transform);
             }
 
             InitiateEquipment();

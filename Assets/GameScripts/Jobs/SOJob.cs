@@ -11,7 +11,8 @@ namespace GameScripts.Jobs
         [SerializeField] private int minimumDefaultSalary;
         [SerializeField] private int maximumDefaultSalary;
         [SerializeField] private int salaryPerLevel;
-
+        [SerializeField] private EJobs job;
+        
         public Sprite _JobIcon => jobIcon;
 
         public string _JobName => jobName;
@@ -21,5 +22,7 @@ namespace GameScripts.Jobs
         public int _MaximumDefaultSalary => maximumDefaultSalary;
 
         public int _SalaryPerLevel => salaryPerLevel;
+
+        public EJobs Job => job;
     }
 }
