@@ -48,11 +48,14 @@ namespace GameScripts.UI
         [SerializeField] private GameObject startCancelPanel;
         [SerializeField] private Button startButton;
         [SerializeField] private GameObject tiredText;
+
+        private StatusesHolder statusesHolder;
         
         private void Start()
         {
             canvasController = GameObject.FindGameObjectWithTag("CanvasController").GetComponent<CanvasController>();
             _playerGladiators = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGladiators>();
+            statusesHolder = GameObject.FindGameObjectWithTag("StatusesHolder").GetComponent<StatusesHolder>();
             HideGladiatorPanel();
             HideStartCancelPanel();
             duelInfoPanel.SetActive(false);
@@ -116,7 +119,7 @@ namespace GameScripts.UI
         public void ChooseGladiator(Gladiator gladiator)
         {
             currentGladiator = gladiator;
-            if (currentGladiator.tired)
+            if (gladiator._Statuses.Contains(statusesHolder.tiredStatus))
             {
                 startButton.interactable = false;
                 tiredText.SetActive(true);

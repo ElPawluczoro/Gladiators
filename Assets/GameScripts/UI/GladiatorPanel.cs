@@ -40,14 +40,9 @@ namespace GameScripts.UI
 
             xpBar.GetComponent<ProgressBar>().SetBar(gladiator.currentXP, gladiator.maxXP, xpBarText);
             
-            if (gladiator.tired)
+            foreach (SOStatus status in gladiator._Statuses)
             {
-                Instantiate(tiredIcon, statusPanelContent.transform);
-            }
-
-            if (gladiator.MoreLikeFarmer)
-            {
-                Instantiate(moreLikeFarmerIcon, statusPanelContent.transform);
+                Instantiate(status._StatusGameObject, statusPanelContent.transform);
             }
 
             InitiateEquipment();

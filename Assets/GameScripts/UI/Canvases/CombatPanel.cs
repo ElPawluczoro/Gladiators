@@ -37,16 +37,18 @@ namespace GameScripts.UI
 
         private CanvasController canvasController;
         private ToursController tourController; 
+        private StatusesHolder statusesHolder;
 
         private void Start()
         {
             canvasController = GameObject.FindGameObjectWithTag("CanvasController").GetComponent<CanvasController>();
             tourController = GameObject.FindGameObjectWithTag("TourController").GetComponent<ToursController>();
+            statusesHolder = GameObject.FindGameObjectWithTag("StatusesHolder").GetComponent<StatusesHolder>();
         }
 
         public void OnPanelOpen()
         {
-            currentGladiator.SetGladiatorTired(true);
+            currentGladiator.AddStatus(statusesHolder.tiredStatus);
             GenerateEnemy();
             playerGladiatorPanel.GetComponent<GladiatorInCombat>().LoadGladiator(currentGladiator);
             enemyGladiatorPanel.GetComponent<GladiatorInCombat>().LoadGladiator(enemyGO.GetComponent<Gladiator>());

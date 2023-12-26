@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GameScripts.Gladiators;
 using UnityEngine;
@@ -10,6 +11,13 @@ namespace GameScripts.Core
         public List<GameObject> playerGladiatorsList { get => _playerGladiators; }
 
         private string salary = "salary";
+
+        private StatusesHolder statusesHolder;
+
+        private void Start()
+        {
+            statusesHolder = GameObject.FindGameObjectWithTag("StatusesHolder").GetComponent<StatusesHolder>();
+        }
 
         private void OnEnable()
         {
@@ -54,7 +62,7 @@ namespace GameScripts.Core
         {
             foreach (var g in _playerGladiators)
             {
-                g.GetComponent<Gladiator>().SetGladiatorTired(false);
+                g.GetComponent<Gladiator>().RemoveStatus(statusesHolder.tiredStatus);
             }
         }
         

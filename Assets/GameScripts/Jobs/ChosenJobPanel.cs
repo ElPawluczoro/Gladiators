@@ -27,9 +27,12 @@ namespace GameScripts.Jobs
 
         [SerializeField] private JobsController jobsController;
 
+        private StatusesHolder statusesHolder;
+
         private void Start()
         {
             _playerGladiators = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGladiators>();
+            statusesHolder = GameObject.FindGameObjectWithTag("StatusesHolder").GetComponent<StatusesHolder>();
         }
 
         public void chooseJob(SOJob job)
@@ -49,7 +52,7 @@ namespace GameScripts.Jobs
             foreach (var g in _playerGladiators.playerGladiatorsList)
             {
                 if(assignedGladiators.Contains(g.GetComponent<Gladiator>())) continue;
-                if(g.GetComponent<Gladiator>().tired) continue;
+                if(g.GetComponent<Gladiator>()._Statuses.Contains(statusesHolder.tiredStatus)) continue;
                 var newGladiatorInJobPanel = Instantiate(gladiatorGo, gladiatorsContent.transform);
                 newGladiatorInJobPanel.GetComponent<GladiatorInJobPanel>().SetProperties(g.GetComponent<Gladiator>());
             }

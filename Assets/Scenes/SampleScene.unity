@@ -7674,7 +7674,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 776851.8}
+  m_AnchoredPosition: {x: 0, y: 894996.94}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &717348445
@@ -9073,7 +9073,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 136606.53}
+  m_AnchoredPosition: {x: 0, y: 225152.3}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &868070820
@@ -10359,7 +10359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 2102922.2}
+  m_AnchoredPosition: {x: 0, y: 2221241.8}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &991847432
@@ -12773,7 +12773,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 182000.16}
+  m_AnchoredPosition: {x: 0, y: 300686.16}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1292847569
@@ -12849,7 +12849,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 588720.44}
+  m_AnchoredPosition: {x: 0, y: 702218.06}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1316172482
@@ -14803,6 +14803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jobsAvailable:
   - {fileID: 11400000, guid: 899c7bdcacd238c419d38190c775d60d, type: 2}
+  farmJob: {fileID: 11400000, guid: 899c7bdcacd238c419d38190c775d60d, type: 2}
 --- !u!1 &1539304105
 GameObject:
   m_ObjectHideFlags: 0
@@ -16540,7 +16541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 776849.06}
+  m_AnchoredPosition: {x: 0, y: 894994.2}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1704883987
@@ -17805,6 +17806,7 @@ MonoBehaviour:
   xpBarText: {fileID: 881455601}
   statusPanelContent: {fileID: 417721365}
   tiredIcon: {fileID: 3577211051778530517, guid: 09970465f19ac38458306ba4bf7f00d9, type: 3}
+  moreLikeFarmerIcon: {fileID: 3577211051778530517, guid: 0844dc2175376db4aadd87575ce8108d, type: 3}
   currentGladiator: {fileID: 0}
 --- !u!1 &1876807897
 GameObject:

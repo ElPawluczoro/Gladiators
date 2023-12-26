@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using GameScripts.Core;
 using GameScripts.Items;
 using GameScripts.Jobs;
@@ -60,23 +61,22 @@ namespace GameScripts.Gladiators
         public int salary { get => _salary; }
         
         //status
+        private StatusesHolder statusesHolder;
+        private List<SOStatus> statuses = new();
         public bool isLastJobFarmer = false;
         [SerializeField] private int farmerStacks = 0;
         private int maxFarmerStacks = 3;
-        [SerializeField]private bool moreLikeFarmer = false;
         private bool removingFarmerStacks = false;
-        
-        public bool MoreLikeFarmer { get => moreLikeFarmer; }
-        
-        private bool _tired;
-        public bool tired { get => _tired; }
-        
+
+        public List<SOStatus> _Statuses => statuses;
+
         //Jobs
         public Dictionary<EJobs, int> bonusJobsGold = new();
         private void Start()
         {
             InitializeJobs();
             var itemsTransform = GameObject.FindGameObjectWithTag("Items").transform;
+            statusesHolder = GameObject.FindGameObjectWithTag("StatusesHolder").GetComponent<StatusesHolder>();
             helmet = itemsTransform.GetChild(0).GetComponent<Item>();
             weapon = itemsTransform.GetChild(1).GetComponent<Item>();
             chest = itemsTransform.GetChild(2).GetComponent<Item>();
@@ -128,11 +128,6 @@ namespace GameScripts.Gladiators
             _gladiatorLevel = gladiator.gladiatorLevel;
         }
 
-        public void SetGladiatorTired(bool t)
-        {
-            _tired = t;
-        }
-
         private void CheckForStacks()
         {
             CheckForFarmerStacks();
@@ -147,7 +142,7 @@ namespace GameScripts.Gladiators
                 removingFarmerStacks = true;
             }
 
-            if (!moreLikeFarmer && farmerStacks == 0)
+            if (!statuses.Contains(statusesHolder.moreLikeFarmerStatus) && farmerStacks == 0)
             {
                 ToursController.onTourEnd -= RemoveFarmerStacks;
                 removingFarmerStacks = false;
@@ -161,7 +156,7 @@ namespace GameScripts.Gladiators
                 farmerStacks++;
             }
 
-            if (farmerStacks == maxFarmerStacks)
+            if (farmerStacks == maxFarmerStacks & !statuses.Contains(statusesHolder.moreLikeFarmerStatus))
             {
                 AddMoreLikeFarmerStatus();
             }
@@ -169,14 +164,14 @@ namespace GameScripts.Gladiators
 
         private void AddMoreLikeFarmerStatus()
         {
-            moreLikeFarmer = true;
+            AddStatus(statusesHolder.moreLikeFarmerStatus);
             _hitChance -= 25;
             bonusJobsGold[EJobs.FARMER] = 10;
         }
 
         private void RemoveMoreLikeFarmerStatus()
         {
-            moreLikeFarmer = false;
+            RemoveStatus(statusesHolder.moreLikeFarmerStatus);
             _hitChance += 25;
             bonusJobsGold[EJobs.FARMER] = 0;
         }
@@ -195,6 +190,16 @@ namespace GameScripts.Gladiators
             }
         }
 
+        public void AddStatus(SOStatus status)
+        {
+            statuses.Add(status);
+        }
+
+        public void RemoveStatus(SOStatus status)
+        {
+            statuses.Remove(status);
+        }
+        
         public void GetXP(int amount)
         {
             if (!canGetXP) return;
